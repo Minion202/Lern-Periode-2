@@ -4,13 +4,12 @@
 
 ## Grob-Planung
 
-1. Wo stehen Sie mit Ihren Noten? In welchen Modulen waren Sie besonders stark; in welchen sind die ungenügend? Welche davon sind besonders wichtig?
-4. Was wäre ein geeignetes Projekt für diese LP2?
+Ich und Maja planen ein Marioartiges spiel zu erstellen. In dem man 5 Erdbeere fangen muss, während es Hindernisse gibt. Wenn man dann am Schluss ind Schoggi Palace ankommt muss man
 
 ## 25.10.2024
 
-- [ ] ...
-- [ ] ...
+- [ ] 
+- [ ] 
 
 ✍️ Heute habe ich... (50-100 Wörter)
 
