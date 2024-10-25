@@ -8,7 +8,7 @@ Maja und ich planen, ein spiel im Stil von Mario zu erstellen. In diesem Spiel m
 
 ## 25.10.2024
 
-- [ ] Wir planen zuerst unser Projekt. Das heisst, wir überlegen, welche Figuren wir verwenden, welche Hindernisse eingebaut werden, welche Art von Puzzle es geben soll und 
+- [x] Wir planen zuerst unser Projekt. Das heisst, wir überlegen, welche Figuren wir verwenden, welche Hindernisse eingebaut werden, welche Art von Puzzle es geben soll und 
       erstellen dazu eine Mindmap.
 - [ ] Danach planen wir, wie wir die verschiedenen Teile des Codes aufteilen. Wir überlegen, wer welche Aufgaben übernimmt und welche Abschnitte des Codes wie miteinander 
       verbunden sein sollen, damit das Spiel am Ende gut funktioniert.
