@@ -20,13 +20,21 @@ Maja und ich planen, ein spiel im Stil von Mario zu erstellen. In diesem Spiel m
 ## 1.11.2024
 
 - [ ] Emoji reaktionschneller machen(damit ich nicht jedes mal auf die Tastatur drücken muss, damit die Figur sich bewegt)
-- [ ] Den  Boden und "Dach" programmieren(eine lange Linie durch das ganze spiel, oben und unten)
-- [ ] Mich darüber recherchieren, wie eine Figur verschwindet, wenn ich sie berühre
+- [x] Den  Boden und "Dach" programmieren(eine lange Linie durch das ganze spiel, oben und unten)
+- [x] Mich darüber recherchieren, wie eine Figur verschwindet, wenn ich sie berühre
 - [ ] Mit Maja zusammen Emoji und Labaryinth zusammen setzen.
 
-✍️ Heute habe ich... (50-100 Wörter)
+✍️ Heute habe ich viel an meinem Projekt gearbeitet und einige wichtige Fortschritte erzielt. Ich habe den Boden und das Dach programmiert, sodass diese nun als Begrenzungen fungieren. Zusätzlich habe ich einen Mechanismus eingebaut, der erkennt, wenn der untere Boden berührt wird, in diesem Fall endet das Spiel mit einem "Game Over". Dieser Teil funktioniert schon recht gut und verleiht dem Spiel ein Grundgerüst.
+
+
 
 ☝️ Vergessen Sie nicht, bis einen ersten Code auf github hochzuladen
 
-## ...
+## 08.11.2024
+
+- [ ] Mit Maja zusammen versuchen die beiden Code zusammen zubringen
+- [ ] Spikes(Hindernisse) in das Spielfeld bauen
+- [ ] Mit Maja schauenn das die Figur nicht durch die Wände kann(im Puzzle)
+- [ ] Emogji wechseln, dass heisst den Code umschreiben
+
 
