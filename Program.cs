@@ -8,7 +8,9 @@ class Program
         int emojiX = 5;
         int emojiY = 10;
         string emoji = "\ud83d\ude01";
-        int groundLevel = emojiY;
+        int landingGroundLevel = 15;
+        int deathGroundLevel = Console.WindowHeight - 2;
+        int ceilingLevel = 1;
         bool isJumping = false;
         int jumpHeight = 3;
         int jumpProgress = 0;
@@ -18,13 +20,40 @@ class Program
         while (true)
         {
             Console.Clear();
+            
+            for (int x = 0; x < Console.WindowWidth; x++)
+            {
+                Console.SetCursorPosition(x, ceilingLevel);
+                Console.Write("-");
+            }
+            
+            for (int x = 0; x < Console.WindowWidth; x++)
+            {
+                Console.SetCursorPosition(x, landingGroundLevel);
+                Console.Write("-");
+            }
+            
+            for (int x = 0; x < Console.WindowWidth; x++)
+            {
+                Console.SetCursorPosition(x, deathGroundLevel);
+                Console.Write("-");
+            }
+            
             Console.SetCursorPosition(emojiX, emojiY);
             Console.Write(emoji);
+            
+            if (emojiY >= deathGroundLevel)
+            {
+                Console.Clear();
+                Console.SetCursorPosition(Console.WindowWidth / 2 - 5, Console.WindowHeight / 2);
+                Console.WriteLine("Game Over - Fell to Death Ground");
+                break;
+            }
             
             if (Console.KeyAvailable)
             {
                 var key = Console.ReadKey(true);
-                
+
                 if (key.Key == ConsoleKey.A && emojiX > 0)
                 {
                     emojiX--;
@@ -42,9 +71,9 @@ class Program
             
             if (isJumping)
             {
-                if (jumpProgress > 0)
+                if (jumpProgress > 0 && emojiY > ceilingLevel + 1)
                 {
-                    emojiY--; 
+                    emojiY--;
                     jumpProgress--;
                 }
                 else
@@ -52,12 +81,17 @@ class Program
                     isJumping = false;
                 }
             }
-            else if (emojiY < groundLevel)
+            else if (emojiY < landingGroundLevel - 1)
+            {
+                emojiY++;
+            }
+            else if (emojiY < deathGroundLevel && emojiY > landingGroundLevel - 1)
             {
                 emojiY++;
             }
 
             Thread.Sleep(100);
         }
+        Console.ReadKey();
     }
 }
