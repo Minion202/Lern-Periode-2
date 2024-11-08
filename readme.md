@@ -32,9 +32,14 @@ Maja und ich planen, ein spiel im Stil von Mario zu erstellen. In diesem Spiel m
 
 ## 08.11.2024
 
-- [ ] Mit Maja zusammen versuchen die beiden Code zusammen zubringen
+- [x] Mit Maja zusammen versuchen die beiden Code zusammen zubringen
 - [ ] Spikes(Hindernisse) in das Spielfeld bauen
-- [ ] Mit Maja schauenn das die Figur nicht durch die Wände kann(im Puzzle)
+- [x] Mit Maja schauenn das die Figur nicht durch die Wände kann(im Puzzle)
 - [ ] Emogji wechseln, dass heisst den Code umschreiben
 
+Heute konnte ich leider nur zwei Arbeitspakete abschließen, darunter das mit dem Labyrinth. Wir haben dabei gute Fortschritte gemacht und das Labyrinth vergrößert, um es noch interessanter und herausfordernder zu gestalten. Es gibt jedoch immer noch verbesserungspotenzial und wir werden schauen, wie wir weiter kommen.
 
+- [ ] Spikes(Hindernisse) in das Spielfeld bauen
+- [ ] Emogji wechseln, dass heisst den Code umschreiben
+- [ ] Mich mit Maja treffen, um den Maze zu besprechen
+- [ ] Mit den Hindernissen anfagnen, (z.B. Spikes bauen damit sie wie richtige Hinderniss sind und nicht auf der ganzen map vorkommen)
