@@ -1,97 +1,82 @@
 ﻿using System;
 using System.Threading;
 
-class Program
+namespace Erdbeerschoggi
 {
-    static void Main()
+    internal class Program
     {
-        int emojiX = 5;
-        int emojiY = 10;
-        string emoji = "\ud83d\ude01";
-        int landingGroundLevel = 15;
-        int deathGroundLevel = Console.WindowHeight - 2;
-        int ceilingLevel = 1;
-        bool isJumping = false;
-        int jumpHeight = 3;
-        int jumpProgress = 0;
+        static char[,] maze = {
+           { '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#' },
+            { 'S', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', '#', ' ', '#', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', '#' },
+            { '#', '#', '#', ' ', '#', ' ', '#', '#', '#', ' ', '#', '#', ' ', '#', ' ', '#', ' ', '#', '#', '#', ' ', '#', '#', ' ', '#' },
+            { '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#', ' ', ' ', '#' },
+            { '#', ' ', '#', '#', '#', '#', '#', ' ', '#', '#', '#', '#', '#', ' ', '#', '#', '#', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#' },
+            { '#', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', '#', '#', '#', '#', '#', ' ', ' ', ' ', '#' },
+            { '#', ' ', '#', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', ' ', '#', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#' },
+            { '#', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', '#', '#', '#', ' ', '#', ' ', ' ', ' ', ' ', ' ', '#' },
+            { '#', '#', '#', ' ', '#', ' ', '#', '#', '#', '#', '#', ' ', '#', ' ', ' ', ' ', '#', ' ', '#', '#', '#', '#', '#', ' ', '#' },
+            { '#', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#' },
+            { '#', '#', '#', '#', '#', '#', '#', '#', '#', ' ', '#', '#', '#', ' ', '#', '#', '#', '#', '#', '#', '#', '#', ' ', ' ', '#' },
+            { '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#' },
+            { '#', ' ', '#', '#', '#', '#', ' ', '#', '#', ' ', '#', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', ' ', '#' },
+            { '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'E', '#' },
+            { '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#' }
+        };
 
-        Console.CursorVisible = false;
+        static int playerX = 0; 
+        static int playerY = 1; 
+        static string playerSymbol = "O";
 
-        while (true)
+        static void Main(string[] args)
         {
-            Console.Clear();
-            
-            for (int x = 0; x < Console.WindowWidth; x++)
-            {
-                Console.SetCursorPosition(x, ceilingLevel);
-                Console.Write("-");
-            }
-            
-            for (int x = 0; x < Console.WindowWidth; x++)
-            {
-                Console.SetCursorPosition(x, landingGroundLevel);
-                Console.Write("-");
-            }
-            
-            for (int x = 0; x < Console.WindowWidth; x++)
-            {
-                Console.SetCursorPosition(x, deathGroundLevel);
-                Console.Write("-");
-            }
-            
-            Console.SetCursorPosition(emojiX, emojiY);
-            Console.Write(emoji);
-            
-            if (emojiY >= deathGroundLevel)
+            Console.CursorVisible = false;
+
+            while (true)
             {
                 Console.Clear();
-                Console.SetCursorPosition(Console.WindowWidth / 2 - 5, Console.WindowHeight / 2);
-                Console.WriteLine("Game Over - Fell to Death Ground");
-                break;
-            }
-            
-            if (Console.KeyAvailable)
-            {
-                var key = Console.ReadKey(true);
+                DrawMaze();
 
-                if (key.Key == ConsoleKey.A && emojiX > 0)
+                
+                Console.SetCursorPosition(playerX, playerY);
+                Console.Write(playerSymbol);
+                
+                if (Console.KeyAvailable)
                 {
-                    emojiX--;
-                }
-                else if (key.Key == ConsoleKey.D && emojiX < Console.WindowWidth - 1)
-                {
-                    emojiX++;
-                }
-                else if (key.Key == ConsoleKey.Spacebar && !isJumping)
-                {
-                    isJumping = true;
-                    jumpProgress = jumpHeight;
-                }
-            }
-            
-            if (isJumping)
-            {
-                if (jumpProgress > 0 && emojiY > ceilingLevel + 1)
-                {
-                    emojiY--;
-                    jumpProgress--;
-                }
-                else
-                {
-                    isJumping = false;
-                }
-            }
-            else if (emojiY < landingGroundLevel - 1)
-            {
-                emojiY++;
-            }
-            else if (emojiY < deathGroundLevel && emojiY > landingGroundLevel - 1)
-            {
-                emojiY++;
-            }
+                    var key = Console.ReadKey(true);
 
-            Thread.Sleep(100);
+                    
+                    int newX = playerX;
+                    int newY = playerY;
+
+                    
+                    if (key.Key == ConsoleKey.W) newY--;         
+                    else if (key.Key == ConsoleKey.S) newY++;    
+                    else if (key.Key == ConsoleKey.A) newX--;    
+                    else if (key.Key == ConsoleKey.D) newX++;    
+
+                  
+                    if (newX >= 0 && newX < maze.GetLength(1) && newY >= 0 && newY < maze.GetLength(0) &&
+                        (maze[newY, newX] == ' ' || maze[newY, newX] == 'S' || maze[newY, newX] == 'E'))
+                    {
+                        playerX = newX;
+                        playerY = newY;
+                    }
+                }
+
+                Thread.Sleep(75);
+            }
         }
-        Console.ReadKey();
+
+        static void DrawMaze()
+        {
+            for (int y = 0; y < maze.GetLength(0); y++)
+            {
+                for (int x = 0; x < maze.GetLength(1); x++)
+                {
+                    Console.Write(maze[y, x]);
+                }
+                Console.WriteLine();
+            }
+        }
     }
 }
