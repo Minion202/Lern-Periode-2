@@ -1,82 +1,139 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 
-namespace Erdbeerschoggi
+class Program
 {
-    internal class Program
+    static void Main() 
     {
-        static char[,] maze = {
-           { '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#' },
-            { 'S', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', '#', ' ', '#', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', '#' },
-            { '#', '#', '#', ' ', '#', ' ', '#', '#', '#', ' ', '#', '#', ' ', '#', ' ', '#', ' ', '#', '#', '#', ' ', '#', '#', ' ', '#' },
-            { '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#', ' ', ' ', '#' },
-            { '#', ' ', '#', '#', '#', '#', '#', ' ', '#', '#', '#', '#', '#', ' ', '#', '#', '#', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#' },
-            { '#', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', '#', '#', '#', '#', '#', ' ', ' ', ' ', '#' },
-            { '#', ' ', '#', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', ' ', '#', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#' },
-            { '#', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', '#', '#', '#', ' ', '#', ' ', ' ', ' ', ' ', ' ', '#' },
-            { '#', '#', '#', ' ', '#', ' ', '#', '#', '#', '#', '#', ' ', '#', ' ', ' ', ' ', '#', ' ', '#', '#', '#', '#', '#', ' ', '#' },
-            { '#', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#' },
-            { '#', '#', '#', '#', '#', '#', '#', '#', '#', ' ', '#', '#', '#', ' ', '#', '#', '#', '#', '#', '#', '#', '#', ' ', ' ', '#' },
-            { '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#' },
-            { '#', ' ', '#', '#', '#', '#', ' ', '#', '#', ' ', '#', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', ' ', '#' },
-            { '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'E', '#' },
-            { '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#' }
-        };
+        int landingGroundLevel = 15;
+        int deathGroundLevel = Console.WindowHeight - 2;
+        int ceilingLevel = 1;
+        int jumpHeight = 3;
+        int playerX = 10; 
+        int playerY = landingGroundLevel - 1;
+        char playerSymbol = 'O';
+        bool isJumping = false;
+        int jumpProgress = 0;
+        Random random = new Random();
 
-        static int playerX = 0; 
-        static int playerY = 1; 
-        static string playerSymbol = "O";
+        // List to store active spikes on the screen
+        List<int> spikes = new List<int>();
 
-        static void Main(string[] args)
+        Console.CursorVisible = false;
+
+        while (true)
         {
-            Console.CursorVisible = false;
+            Console.Clear();
+            playerY = landingGroundLevel - 1;
+            isJumping = false;
+            spikes.Clear();
 
+            // Infinite game loop
             while (true)
             {
                 Console.Clear();
-                DrawMaze();
-
                 
+                // Draw ceiling
+                for (int x = 0; x < Console.WindowWidth; x++)
+                {
+                    Console.SetCursorPosition(x, ceilingLevel);
+                    Console.Write("-");
+                }
+                
+                // Draw landing ground
+                for (int x = 0; x < Console.WindowWidth; x++)
+                {
+                    Console.SetCursorPosition(x, landingGroundLevel);
+                    Console.Write("-");
+                }
+                
+                // Draw death ground
+                for (int x = 0; x < Console.WindowWidth; x++)
+                {
+                    Console.SetCursorPosition(x, deathGroundLevel);
+                    Console.Write("-");
+                }
+                
+                // Draw player
                 Console.SetCursorPosition(playerX, playerY);
                 Console.Write(playerSymbol);
-                
+
+                // Draw and update spikes
+                for (int i = 0; i < spikes.Count; i++)
+                {
+                    int spikeX = spikes[i];
+                    DrawSpike(spikeX, landingGroundLevel - 1);
+
+                    // Check for collision with the player
+                    if (spikeX == playerX && playerY == landingGroundLevel - 1)
+                    {
+                        GameOver();
+                        goto Restart;
+                    }
+
+                    // Move the spike to the left
+                    spikes[i]--;
+                }
+
+                // Remove spikes that have gone off the screen
+                spikes.RemoveAll(spikeX => spikeX < 0);
+
+                // Randomly add new spikes from the right side
+                if (random.Next(0, 10) < 2)
+                {
+                    spikes.Add(Console.WindowWidth - 1);
+                }
+
+                // Handle player jumping
                 if (Console.KeyAvailable)
                 {
                     var key = Console.ReadKey(true);
-
-                    
-                    int newX = playerX;
-                    int newY = playerY;
-
-                    
-                    if (key.Key == ConsoleKey.W) newY--;         
-                    else if (key.Key == ConsoleKey.S) newY++;    
-                    else if (key.Key == ConsoleKey.A) newX--;    
-                    else if (key.Key == ConsoleKey.D) newX++;    
-
-                  
-                    if (newX >= 0 && newX < maze.GetLength(1) && newY >= 0 && newY < maze.GetLength(0) &&
-                        (maze[newY, newX] == ' ' || maze[newY, newX] == 'S' || maze[newY, newX] == 'E'))
+                    if (key.Key == ConsoleKey.Spacebar && !isJumping)
                     {
-                        playerX = newX;
-                        playerY = newY;
+                        isJumping = true;
+                        jumpProgress = jumpHeight;
                     }
                 }
-
-                Thread.Sleep(75);
-            }
-        }
-
-        static void DrawMaze()
-        {
-            for (int y = 0; y < maze.GetLength(0); y++)
-            {
-                for (int x = 0; x < maze.GetLength(1); x++)
+                
+                // Jump mechanics
+                if (isJumping)
                 {
-                    Console.Write(maze[y, x]);
+                    if (jumpProgress > 0 && playerY > ceilingLevel + 1)
+                    {
+                        playerY--;
+                        jumpProgress--;
+                    }
+                    else
+                    {
+                        isJumping = false;
+                    }
                 }
-                Console.WriteLine();
+                else if (playerY < landingGroundLevel - 1)
+                {
+                    playerY++;
+                }
+
+                Thread.Sleep(100);
             }
+
+        Restart:
+            Thread.Sleep(2000);
         }
+    }
+
+    static void DrawSpike(int x, int groundLevel)
+    {
+        // Draw a spike moving horizontally from right to left
+        Console.SetCursorPosition(x, groundLevel);
+        Console.Write("^");
+    }
+
+    static void GameOver()
+    {
+        Console.Clear();
+        Console.SetCursorPosition(Console.WindowWidth / 2 - 5, Console.WindowHeight / 2);
+        Console.WriteLine("Game Over!");
+        Thread.Sleep(2000);
     }
 }
