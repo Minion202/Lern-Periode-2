@@ -39,12 +39,16 @@ Maja und ich planen, ein spiel im Stil von Mario zu erstellen. In diesem Spiel m
 
 Heute konnte ich leider nur zwei Arbeitspakete abschließen, darunter das mit dem Labyrinth. Wir haben dabei gute Fortschritte gemacht und das Labyrinth vergrößert, um es noch interessanter und herausfordernder zu gestalten. Es gibt jedoch immer noch verbesserungspotenzial und wir werden schauen, wie wir weiter kommen.
 
+## 15.11.2024
+
 - [x] Spikes(Hindernisse) in das Spielfeld bauen
 - [x] Emogji wechseln, dass heisst den Code umschreiben
 - [x] Mich mit Maja treffen, um den Maze zu besprechen
 - [x] Den code umschreiben, dass die Figur immerlauft und man nur springen muss
 
 Heute haben ich und Maja entschieden das wir es zusammen programmieren, in dem wir uns treffen. Wir haben zusammen die Spikes eingebaut(was noch verbessert werden muss) und dann haben wir noch recherchiert, wie man ein dauerhaftes Spielfeld aufbaut und es angewendet. Zu all dem habe ich noch den Code umgeschrieben, damit alles mit einem Kreis ist. Wir haben uns entschieden das Spiel etwas zu ändern und sogesagt ein Jump and Run (wie das Dino Spiel auf Google), dann habe ich noch den Code Maja geschickt.
+
+## 22.11.2024
 
 - [ ] Mit Maja genauer absprechen, wie wir das Jump n Run machen möchten.
 - [ ] Danach Hinderniss ein programmieren(Das es eine Lücke im Boden hat)
