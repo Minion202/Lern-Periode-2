@@ -46,4 +46,10 @@ Heute konnte ich leider nur zwei Arbeitspakete abschließen, darunter das mit de
 
 Heute haben ich und Maja entschieden das wir es zusammen programmieren, in dem wir uns treffen. Wir haben zusammen die Spikes eingebaut(was noch verbessert werden muss) und dann haben wir noch recherchiert, wie man ein dauerhaftes Spielfeld aufbaut und es angewendet. Zu all dem habe ich noch den Code umgeschrieben, damit alles mit einem Kreis ist. Wir haben uns entschieden das Spiel etwas zu ändern und sogesagt ein Jump and Run (wie das Dino Spiel auf Google), dann habe ich noch den Code Maja geschickt.
 
+- [ ] Mit Maja genauer absprechen, wie wir das Jump n Run machen möchten.
+- [ ] Danach Hinderniss ein programmieren(Das es eine Lücke im Boden hat)
+- [ ] Die Spikes korrigieren weil sie zu random vorkommen
+- [ ] Schauen wie man das mit den Erdbeeren machen soll(recherche)
+      
+
 
