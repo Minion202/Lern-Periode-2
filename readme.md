@@ -50,10 +50,22 @@ Heute haben ich und Maja entschieden das wir es zusammen programmieren, in dem w
 
 ## 22.11.2024
 
-- [ ] Mit Maja genauer absprechen, wie wir das Jump n Run machen möchten.
-- [ ] Danach Hinderniss ein programmieren(Das es eine Lücke im Boden hat)
-- [ ] Die Spikes korrigieren weil sie zu random vorkommen
+- [x] Mit Maja genauer absprechen, wie wir das Jump n Run machen möchten.
+- [x] Danach Hinderniss ein programmieren(Das es eine Lücke im Boden hat)
+- [x] Die Spikes korrigieren weil sie zu random vorkommen
 - [ ] Schauen wie man das mit den Erdbeeren machen soll(recherche)
+
+Heute habe ich zunächst mit Maja darüber gesprochen, wie wir das Spiel konkret gestalten möchten. Anschließend habe ich die Spikes optimiert, sodass sie nicht mehr ständig erscheinen und sie stattdessen am Boden platziert. Wir haben auch ausprobiert, Lücken im Boden einzufügen, was jedoch nicht wie geplant funktioniert hat. Daher haben wir den zweiten Boden entfernt. Leider hat die Zeit am Ende nicht mehr gereicht, um die Recherche durchzuführen.
+
+## 29.11.2024
+
+- [ ] Schauen wie man das mit den Erdbeeren machen soll(recherche)
+- [ ] Das einfügen von den Erdbeeren(nach der Recherche)
+- [ ] Erstes Level mit dem Maze machen(den Code von mir und Maja in einen)
+- [ ] Den Ball so programmieren, dass es bei jedem nächsten Level schneller wird.
+      
+
+
       
 
 
