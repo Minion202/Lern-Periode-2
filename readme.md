@@ -59,13 +59,18 @@ Heute habe ich zunächst mit Maja darüber gesprochen, wie wir das Spiel konkret
 
 ## 29.11.2024
 
-- [ ] Schauen wie man das mit den Erdbeeren machen soll(recherche)
-- [ ] Das einfügen von den Erdbeeren(nach der Recherche)
+- [x] Schauen wie man das mit den Erdbeeren machen soll(recherche)
+- [x] Das einfügen von den Erdbeeren(nach der Recherche)
 - [ ] Erstes Level mit dem Maze machen(den Code von mir und Maja in einen)
 - [ ] Den Ball so programmieren, dass es bei jedem nächsten Level schneller wird.
       
+Heute konnte ich nicht alle Ziele erreichen, die ich mir vorgenommen hatte. Zudem gibt es einige Aspekte im Code, die ich für das nächste Mal noch deutlich verbessern muss.
 
+## 06.01.2024
 
-      
+- [ ] Die Fehler, die ich habe beheben
+- [ ] Die Erdbeeren höher platzieren
+- [ ] Erstes Level mit dem Maze probieren
+- [ ] Mehrere Versuche machen, nachschauen, ob es wirklich keine Fehler mehr im Code hat
 
 
