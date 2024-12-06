@@ -68,9 +68,23 @@ Heute konnte ich nicht alle Ziele erreichen, die ich mir vorgenommen hatte. Zude
 
 ## 06.01.2024
 
-- [ ] Die Fehler, die ich habe beheben
+- [x] Die Fehler, die ich habe beheben
 - [ ] Die Erdbeeren höher platzieren
-- [ ] Erstes Level mit dem Maze probieren
+- [x] Erstes Level mit dem Maze probieren
 - [ ] Mehrere Versuche machen, nachschauen, ob es wirklich keine Fehler mehr im Code hat
+
+Heute habe ich die Fehler, die ich hatte behoben aber es kammen leider neue dazu, schliesslich habe ich aber versucht den Maze und das Jump N Run zusammen zu bringen.
+
+
+## 13.01.2024
+
+- [ ] Fehler im Code beheben
+- [ ] 2 Level coden(10 Erdbeeren)
+- [ ] 3 Level coden(15 Erdbeeren)
+- [ ] AoD anschauen
+
+
+
+
 
 
