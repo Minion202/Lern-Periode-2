@@ -4,7 +4,36 @@ using System.Threading;
 
 class Program
 {
+    static char[,] maze = {
+        { '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#' },
+        { 'S', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#' },
+        { '#', '#', '#', ' ', '#', ' ', '#', '#', '#', ' ', '#', ' ', '#', '#', ' ', '#', ' ', '#', ' ', '#' },
+        { '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', '#', ' ', '#' },
+        { '#', ' ', '#', '#', '#', ' ', '#', ' ', '#', '#', '#', ' ', '#', '#', '#', '#', ' ', '#', ' ', '#' },
+        { '#', ' ', '#', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#' },
+        { '#', ' ', '#', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', ' ', '#', ' ', '#', '#', '#' },
+        { '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#' },
+        { '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', 'E', '#' }
+    };
+
+    static int playerX = 1;
+    static int playerY = 1;
+
     static void Main()
+    {
+        int berriesCollected = BerryCollectionStage();
+
+        if (berriesCollected > 0)
+        {
+            Console.Clear();
+            Console.WriteLine("Great! You've collected all the berries. Now complete the maze!");
+            Thread.Sleep(2000);
+            
+            MazeStage();
+        }
+    }
+
+    static int BerryCollectionStage()
     {
         int landingGroundLevel = 15;
         int ceilingLevel = 1;
@@ -16,141 +45,177 @@ class Program
         bool isJumping = false;
         int jumpProgress = 0;
         Random random = new Random();
-
         List<int> spikes = new List<int>();
         List<int> berries = new List<int>();
         int spikeCooldown = 0;
         int berryCooldown = 0;
         int berriesCollected = 0;
-        int totalBerries = 10;
+        int totalBerries = 5;
 
         Console.CursorVisible = false;
 
-        while (true)
+        while (berriesCollected < totalBerries)
         {
             Console.Clear();
-            playerY = landingGroundLevel - 1;
-            isJumping = false;
-            spikes.Clear();
-            berries.Clear();
-            spikeCooldown = 0;
-            berryCooldown = 0;
-            berriesCollected = 0;
-
-            while (true)
+            
+            for (int x = 0; x < Console.WindowWidth; x++)
             {
-                Console.Clear();
-                
-                for (int x = 0; x < Console.WindowWidth; x++)
+                Console.SetCursorPosition(x, ceilingLevel);
+                Console.Write("-");
+            }
+            for (int x = 0; x < Console.WindowWidth; x++)
+            {
+                Console.SetCursorPosition(x, landingGroundLevel);
+                Console.Write("-");
+            }
+            
+            Console.SetCursorPosition(playerX, playerY);
+            Console.Write(playerSymbol);
+            
+            for (int i = 0; i < spikes.Count; i++)
+            {
+                int spikeX = spikes[i];
+                DrawSpike(spikeX, landingGroundLevel);
+                if (spikeX == playerX && playerY == landingGroundLevel - 1)
                 {
-                    Console.SetCursorPosition(x, ceilingLevel);
-                    Console.Write("-");
+                    GameOver();
+                    return 0;
                 }
-                for (int x = 0; x < Console.WindowWidth; x++)
+                spikes[i]--;
+            }
+            spikes.RemoveAll(spikeX => spikeX < 0);
+            if (spikeCooldown == 0 && random.Next(0, 10) < 2)
+            {
+                spikes.Add(Console.WindowWidth - 1);
+                spikeCooldown = 10;
+            }
+            if (spikeCooldown > 0)
+            {
+                spikeCooldown--;
+            }
+            
+            for (int i = 0; i < berries.Count; i++)
+            {
+                int berryX = berries[i];
+                int berryY = landingGroundLevel - 1;
+                Console.SetCursorPosition(berryX, berryY);
+                Console.Write(berrySymbol);
+                if (berryX == playerX && playerY == berryY)
                 {
-                    Console.SetCursorPosition(x, landingGroundLevel);
-                    Console.Write("-");
+                    berriesCollected++;
+                    berries[i] = -1;
                 }
-                
-                Console.SetCursorPosition(playerX, playerY);
-                Console.Write(playerSymbol);
-                
-                for (int i = 0; i < spikes.Count; i++)
-                {
-                    int spikeX = spikes[i];
-                    DrawSpike(spikeX, landingGroundLevel);
-
-                    if (spikeX == playerX && playerY == landingGroundLevel - 1)
-                    {
-                        GameOver();
-                        goto Restart;
-                    }
-
-                    spikes[i]--;
-                }
-
-                spikes.RemoveAll(spikeX => spikeX < 0);
-                
-                if (spikeCooldown == 0 && random.Next(0, 10) < 2)
-                {
-                    spikes.Add(Console.WindowWidth - 1);
-                    spikeCooldown = 10;
-                }
-
-                if (spikeCooldown > 0)
-                {
-                    spikeCooldown--;
-                }
-
-                for (int i = 0; i < berries.Count; i++)
-                {
-                    int berryX = berries[i];
-                    Console.SetCursorPosition(berryX, landingGroundLevel - 1);
-                    Console.Write(berrySymbol);
-
-                    if (berryX == playerX && playerY == landingGroundLevel - 1)
-                    {
-                        berriesCollected++;
-                        berries[i] = -1;
-                    }
-
-                    berries[i]--;
-                }
-
-                berries.RemoveAll(berryX => berryX < 0);
-                
-                if (berryCooldown == 0 && random.Next(0, 10) < 3)
-                {
-                    berries.Add(Console.WindowWidth - 1);
-                    berryCooldown = 15;
-                }
-
-                if (berryCooldown > 0)
-                {
-                    berryCooldown--;
-                }
-                
-                Console.SetCursorPosition(0, 0);
-                Console.Write($"Erdbeeren gesammelt: {berriesCollected}/{totalBerries}");
-                
-                if (berriesCollected >= totalBerries)
-                {
-                    Win();
-                    goto Restart;
-                }
-
-                if (Console.KeyAvailable)
-                {
-                    var key = Console.ReadKey(true);
-                    if (key.Key == ConsoleKey.Spacebar && !isJumping)
-                    {
-                        isJumping = true;
-                        jumpProgress = jumpHeight;
-                    }
-                }
-
-                if (isJumping)
-                {
-                    if (jumpProgress > 0 && playerY > ceilingLevel + 1)
-                    {
-                        playerY--;
-                        jumpProgress--;
-                    }
-                    else
-                    {
-                        isJumping = false;
-                    }
-                }
-                else if (playerY < landingGroundLevel - 1)
-                {
-                    playerY++;
-                }
-
-                Thread.Sleep(100);
+                berries[i]--;
+            }
+            berries.RemoveAll(berryX => berryX < 0);
+            if (berryCooldown == 0 && random.Next(0, 10) < 1)
+            {
+                berries.Add(Console.WindowWidth - 1);
+                berryCooldown = 15;
+            }
+            if (berryCooldown > 0)
+            {
+                berryCooldown--;
             }
 
-        Restart:
-            Thread.Sleep(2000);
+            Console.SetCursorPosition(0, 0);
+            Console.Write($"Berries Collected: {berriesCollected}/{totalBerries}");
+            
+            if (Console.KeyAvailable)
+            {
+                var key = Console.ReadKey(true);
+                if (key.Key == ConsoleKey.Spacebar && !isJumping && playerY == landingGroundLevel - 1)
+                {
+                    isJumping = true;
+                    jumpProgress = jumpHeight;
+                }
+            }
+            
+            if (isJumping)
+            {
+                if (jumpProgress > 0)
+                {
+                    playerY--;
+                    jumpProgress--;
+                }
+                else
+                {
+                    isJumping = false;
+                }
+            }
+            else if (playerY < landingGroundLevel - 1)
+            {
+                playerY++;
+            }
+
+            Thread.Sleep(100);
+        }
+
+        return berriesCollected;
+    }
+
+    static void MazeStage()
+    {
+        Console.Clear();
+
+        while (true)
+        {
+            DrawMaze();
+            DrawPlayer();
+
+            if (Console.KeyAvailable)
+            {
+                var key = Console.ReadKey(true);
+                MovePlayer(key.Key);
+            }
+
+            Thread.Sleep(75);
+        }
+    }
+
+    static void DrawMaze()
+    {
+        for (int y = 0; y < maze.GetLength(0); y++)
+        {
+            for (int x = 0; x < maze.GetLength(1); x++)
+            {
+                Console.Write(maze[y, x]);
+            }
+            Console.WriteLine();
+        }
+    }
+
+    static void DrawPlayer()
+    {
+        Console.SetCursorPosition(playerX, playerY);
+        Console.Write("O");
+    }
+
+    static void MovePlayer(ConsoleKey key)
+    {
+        int newX = playerX;
+        int newY = playerY;
+        
+        switch (key)
+        {
+            case ConsoleKey.W: newY--; break;
+            case ConsoleKey.S: newY++; break; 
+            case ConsoleKey.A: newX--; break;
+            case ConsoleKey.D: newX++; break;
+        }
+        
+        if (maze[newY, newX] != '#')
+        {
+            playerX = newX;
+            playerY = newY;
+            
+            if (maze[playerY, playerX] == 'E')
+            {
+                Console.Clear();
+                Console.WriteLine("Congratulations! Oki Doki hier ist deine Erdbeerschoggi!");
+                Console.ReadKey();
+                Environment.Exit(0);
+            }
         }
     }
 
@@ -166,14 +231,6 @@ class Program
         Console.SetCursorPosition(Console.WindowWidth / 2 - 5, Console.WindowHeight / 2);
         Console.WriteLine("Game Over!");
         Thread.Sleep(2000);
-    }
-
-    static void Win()
-    {
-        Console.Clear();
-        Console.SetCursorPosition(Console.WindowWidth / 2 - 5, Console.WindowHeight / 2);
-        Console.WriteLine("You Win!");
-        Thread.Sleep(2000);
+        Environment.Exit(0);
     }
 }
-
