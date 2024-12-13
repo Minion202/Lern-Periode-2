@@ -78,13 +78,17 @@ Heute habe ich die Fehler, die ich hatte behoben aber es kammen leider neue dazu
 
 ## 13.01.2024
 
-- [ ] Fehler im Code beheben
+- [x] Fehler im Code beheben
 - [ ] 2 Level coden(10 Erdbeeren)
 - [ ] 3 Level coden(15 Erdbeeren)
 - [ ] AoD anschauen
 
 
+Heute haben wir alle Fehler behoben, wir haben viel Fortschritte gemacht. Alle Levels programmiert, nur haben wir sie noch nicht alle zusammen gesetzt.
 
+## 20.01.2024
 
+- [ ] Level 2 fertig programmierern(Level ins Level)
+- [ ] Level 3 fertig programmieren(Level ins Level)
 
 
