@@ -91,6 +91,8 @@ Heute haben wir alle Fehler behoben, wir haben viel Fortschritte gemacht. Alle L
 - [x] Level 2 fertig programmierern(Level ins Level)
 - [x] Level 3 fertig programmieren(Level ins Level)
 
+Heute haben ich alle Level fertig, programmiert und noch ein paar touch ups gemacht. Wie das es sagt Level 2 wird gestarted und so weiter.
+
 ## Fertiges Projekt
 Das Ziel des Spiels ist es, am Ende eine köstliche Erdbeerschokolade zu erhalten. Es handelt sich um ein Jump-and-Run-Spiel, bei dem du in jedem Level Erdbeeren sammeln musst. Die Anzahl der benötigten Erdbeeren steigt mit jedem Level:
 
@@ -106,6 +108,15 @@ Erst wenn du alle Aufgaben erfolgreich gemeistert hast, wartet die ultimative Be
 
 <img width="176" alt="Bildschirmfoto 2024-12-20 um 10 27 27" src="https://github.com/user-attachments/assets/ed55ccdf-80a8-494c-837c-5f48d5288e11" />
 
+
+
+## Reflexion
+
+Zu Beginn haben wir gemeinsam geplant, was wir genau machen wollten. Da wir den Spruch „Okidoki Erdbeerschoggi“ nutzen wollten, kamen wir auf die Idee, ihn in unser Spiel zu integrieren. So entstand der Plan, ein marioartiges Spiel zu erstellen, bei dem man Erdbeeren sammelt, Hindernisse überwindet und am Ende ein Puzzle löst. Als Belohnung sollte man Schokolade erhalten, wodurch Erdbeeren und Schokolade zu einer Erdbeerschoggi verschmelzen. Am Ende würde der Satz „Okidoki, hier ist deine Erdbeerschoggi!“ erscheinen.
+Unsere erste Idee war, die Erdbeeren, die Schokolade und die Spielfigur als Emojis darzustellen. Da dies in meinem Programm jedoch nicht so gut funktionierte, haben wir einfache Alternativen genutzt: einen Kreis als Spielfigur, Sterne für die Erdbeeren und keine direkte Darstellung für die Schokolade. Nachdem wir das Konzept grob geplant hatten, haben wir die Aufgaben verteilt: Mina begann mit dem marioartigen Jump-and-Run-Spiel, während ich mich um die Puzzles kümmerte.
+Für die Puzzles überlegte ich, welches Format am besten passen würde, und entschied mich für ein Labyrinth. Mina stellte währenddessen fest, dass ein Jump-and-Run-Spiel im Stil des Google-Dino-Spiels gut funktionieren würde. Bei meiner Recherche fand ich Labyrinthe, die aus Hashtags erstellt wurden, und entschied mich, diese Art zu übernehmen. Anschließend habe ich drei Labyrinthe mit Hashtags erstellt.
+Nachdem ich mit den Labyrinthen fertig war, half ich Mina mit dem Jump-and-Run-Teil, indem ich eine Schleife für drei Levels implementieren wollte. Da das jedoch nicht funktionierte, haben wir einen anderen Ansatz gewählt: Wir nutzten „TransitionToNextLevel“ und definierten die Erdbeeren individuell für jedes der drei Levels.
+Für zukünftige Projekte könnten wir eine bessere Methode finden, den Code effizient zu teilen. In diesem Fall haben wir uns den Code gegenseitig geschickt und parallel programmiert, während wir per Call mit Bildschirmfreigabe arbeiteten. Mit etwas besserer Absprache und Planung könnten wir beim nächsten Mal noch effektiver zusammenarbeiten und möglicherweise mehr direkt gemeinsam programmieren.
 
 
 
