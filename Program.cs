@@ -4,21 +4,7 @@ using System.Threading;
 
 class Program
 {
-    static char[,] mazeLevel2 =
-    {
-        { '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#' },
-        { 'S', ' ', ' ', ' ', '#', ' ', '#', '#', ' ', ' ', ' ', ' ', ' ', ' ', '#' },
-        { '#', '#', '#', ' ', '#', ' ', '#', '#', ' ', '#', '#', '#', '#', '#', '#' },
-        { '#', ' ', ' ', ' ', '#', ' ', '#', ' ', ' ', '#', ' ', ' ', ' ', ' ', '#' },
-        { '#', ' ', '#', '#', '#', ' ', '#', '#', '#', '#', ' ', '#', ' ', '#', '#' },
-        { '#', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', '#', ' ', '#', ' ', '#', '#' },
-        { '#', '#', '#', ' ', '#', '#', ' ', '#', ' ', '#', ' ', '#', ' ', '#', '#' },
-        { '#', ' ', '#', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#', ' ', ' ', '#' },
-        { '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', 'E', '#' }
-    };
-
-    static char[,] mazeLevel1 =
-    {
+    static char[,] level1Maze = {
         { '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#' },
         { 'S', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#' },
         { '#', '#', '#', ' ', '#', ' ', '#', '#', '#', ' ', '#', ' ', '#', '#', ' ', '#', ' ', '#', ' ', '#' },
@@ -30,34 +16,90 @@ class Program
         { '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', 'E', '#' }
     };
 
+    static char[,] level2Maze = {
+        { '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#' },
+        { 'S', ' ', ' ', ' ', '#', ' ', '#', '#', ' ', ' ', ' ', ' ', ' ', ' ', '#' },
+        { '#', '#', '#', ' ', '#', ' ', '#', '#', ' ', '#', '#', '#', '#', '#', '#' },
+        { '#', ' ', ' ', ' ', '#', ' ', '#', ' ', ' ', '#', ' ', ' ', ' ', ' ', '#' },
+        { '#', ' ', '#', '#', '#', ' ', '#', '#', '#', '#', ' ', '#', ' ', '#', '#' },
+        { '#', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', '#', ' ', '#', ' ', '#', '#' },
+        { '#', '#', '#', ' ', '#', '#', ' ', '#', ' ', '#', ' ', '#', ' ', '#', '#' },
+        { '#', ' ', '#', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#', ' ', ' ', '#' },
+        { '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', 'E', '#' }
+    };
+
+    static char[,] level3Maze = {
+        { '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#' },
+        { 'S', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', '#', ' ', '#', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', '#' },
+        { '#', '#', '#', ' ', '#', ' ', '#', '#', '#', ' ', '#', '#', ' ', '#', ' ', '#', ' ', '#', '#', '#', ' ', '#', '#', ' ', '#' },
+        { '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#', ' ', ' ', '#' },
+        { '#', ' ', '#', '#', '#', '#', '#', ' ', '#', '#', '#', '#', '#', ' ', '#', '#', '#', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#' },
+        { '#', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', '#', '#', '#', '#', '#', ' ', ' ', ' ', '#' },
+        { '#', ' ', '#', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', ' ', '#', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#' },
+        { '#', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', '#', '#', '#', ' ', '#', ' ', ' ', ' ', ' ', ' ', '#' },
+        { '#', '#', '#', ' ', '#', ' ', '#', '#', '#', '#', '#', ' ', '#', ' ', ' ', ' ', '#', ' ', '#', '#', '#', '#', '#', ' ', '#' },
+        { '#', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#' },
+        { '#', '#', '#', '#', '#', '#', '#', '#', '#', ' ', '#', '#', '#', ' ', '#', '#', '#', '#', '#', '#', '#', '#', ' ', ' ', '#' },
+        { '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#' },
+        { '#', ' ', '#', '#', '#', '#', ' ', '#', '#', ' ', '#', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#' },
+        { '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#' },
+        { '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', 'E', '#' }
+    };
+
+    static char[,] currentMaze;
     static int playerX = 1;
     static int playerY = 1;
-    static bool isLevel2 = false;
 
     static void Main()
     {
-        int berriesCollected = BerryCollectionStage();
+        Console.Clear();
+        Console.WriteLine("Welcome to Erdbeerschoggi! Collect strawberries and complete three levels!");
+        Thread.Sleep(3000);
+        
+        int berriesCollected = BerryCollectionStage(5);
 
         if (berriesCollected > 0)
         {
             Console.Clear();
-            Console.WriteLine("Great! You've collected all the berries. Now complete the maze (Level 1)!");
+            Console.WriteLine("Level 1 Schoggimaze: Complete the Schoggimaze!");
             Thread.Sleep(2000);
+            currentMaze = level1Maze;
+            MazeStage();
+        }
+        
+        Console.Clear();
+        Console.WriteLine("Congratulations on completing Level 1! Level 2 starts now!");
+        Thread.Sleep(3000);
+        berriesCollected = BerryCollectionStage(10);
 
-            MazeStage(mazeLevel1);
-
+        if (berriesCollected > 0)
+        {
             Console.Clear();
-            Console.WriteLine("Congratulations! You completed Level 1. Now onto Level 2!");
+            Console.WriteLine("Level 2 Schoggimaze: Complete the schoggimaze!");
             Thread.Sleep(2000);
-
-            isLevel2 = true;
+            currentMaze = level2Maze;
             playerX = 1;
             playerY = 1;
-            MazeStage(mazeLevel2);
+            MazeStage();
+        }
+        
+        Console.Clear();
+        Console.WriteLine("Amazing! You completed Level 2! Level 3 starts now!");
+        Thread.Sleep(3000);
+        berriesCollected = BerryCollectionStage(15);
+
+        if (berriesCollected > 0)
+        {
+            Console.Clear();
+            Console.WriteLine("Level 3 Schoggimaze: Complete the Schoggimaze!");
+            Thread.Sleep(2000);
+            currentMaze = level3Maze;
+            playerY = 1;
+            MazeStage();
         }
     }
 
-    static int BerryCollectionStage()
+    static int BerryCollectionStage(int totalBerries)
     {
         int landingGroundLevel = 15;
         int ceilingLevel = 1;
@@ -74,7 +116,6 @@ class Program
         int spikeCooldown = 0;
         int berryCooldown = 0;
         int berriesCollected = 0;
-        int totalBerries = 5;
 
         Console.CursorVisible = false;
 
@@ -178,33 +219,41 @@ class Program
         return berriesCollected;
     }
 
-    static void MazeStage(char[,] maze)
+    static void MazeStage()
     {
         Console.Clear();
 
         while (true)
         {
-            DrawMaze(maze);
+            DrawMaze();
             DrawPlayer();
 
             if (Console.KeyAvailable)
             {
                 var key = Console.ReadKey(true);
-                MovePlayer(key.Key, maze);
+                MovePlayer(key.Key);
+            }
+
+            if (currentMaze[playerY, playerX] == 'E')
+            {
+                Console.Clear();
+                Console.WriteLine("Oki Doki, hier ist deine Erdbeerschoggi!");
+                Thread.Sleep(2000);
+                break;
             }
 
             Thread.Sleep(75);
         }
     }
 
-    static void DrawMaze(char[,] maze)
+    static void DrawMaze()
     {
-        for (int y = 0; y < maze.GetLength(0); y++)
+        for (int y = 0; y < currentMaze.GetLength(0); y++)
         {
-            for (int x = 0; x < maze.GetLength(1); x++)
+            for (int x = 0; x < currentMaze.GetLength(1); x++)
             {
                 Console.SetCursorPosition(x, y);
-                Console.Write(maze[y, x]);
+                Console.Write(currentMaze[y, x]);
             }
         }
     }
@@ -215,7 +264,7 @@ class Program
         Console.Write("O");
     }
 
-    static void MovePlayer(ConsoleKey key, char[,] maze)
+    static void MovePlayer(ConsoleKey key)
     {
         int newX = playerX;
         int newY = playerY;
@@ -228,18 +277,10 @@ class Program
             case ConsoleKey.DownArrow: newY++; break;
         }
 
-        if (maze[newY, newX] != '#')
+        if (currentMaze[newY, newX] != '#')
         {
             playerX = newX;
             playerY = newY;
-
-            if (maze[playerY, playerX] == 'E')
-            {
-                Console.Clear();
-                Console.WriteLine(isLevel2 ? "Congratulations! You've completed Level 2!" : "Level 1 complete!");
-                Console.ReadKey();
-                Environment.Exit(0);
-            }
         }
     }
 
