@@ -88,7 +88,25 @@ Heute haben wir alle Fehler behoben, wir haben viel Fortschritte gemacht. Alle L
 
 ## 20.01.2024
 
-- [ ] Level 2 fertig programmierern(Level ins Level)
-- [ ] Level 3 fertig programmieren(Level ins Level)
+- [x] Level 2 fertig programmierern(Level ins Level)
+- [x] Level 3 fertig programmieren(Level ins Level)
+
+## Fertiges Projekt
+Das Ziel des Spiels ist es, am Ende eine köstliche Erdbeerschokolade zu erhalten. Es handelt sich um ein Jump-and-Run-Spiel, bei dem du in jedem Level Erdbeeren sammeln musst. Die Anzahl der benötigten Erdbeeren steigt mit jedem Level:
+
+Level 1: Sammle 5 Erdbeeren.
+Level 2: Sammle 10 Erdbeeren.
+Level 3: Sammle 15 Erdbeeren.
+
+Nachdem du die Jump-and-Run-Herausforderung eines Levels gemeistert hast, musst du zusätzlich ein Schoggi-Maze (Schokoladen-Labyrinth) bewältigen. Mit jedem Level wird auch das Maze komplizierter, wodurch die Herausforderung stetig wächst.
+
+Erst wenn du alle Aufgaben erfolgreich gemeistert hast, wartet die ultimative Belohnung auf dich:
+
+„Oki Doki, hier ist deine Erdbeerschoggi!“
+
+<img width="176" alt="Bildschirmfoto 2024-12-20 um 10 27 27" src="https://github.com/user-attachments/assets/ed55ccdf-80a8-494c-837c-5f48d5288e11" />
+
+
+
 
 
